@@ -1,7 +1,7 @@
 package com.luisn.passatempo;
 
-import com.luisn.passatempo.domain.User;
-import com.luisn.passatempo.repository.UserRepository;
+import com.luisn.passatempo.domain.Ator;
+import com.luisn.passatempo.repository.AtorRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,12 +15,15 @@ public class PassatempoApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDatabase(UserRepository userRepository) {
+	CommandLineRunner initDatabase(AtorRepository atorRepository) {
 		return args -> {
-			userRepository.deleteAll();
-			User user = new User();
-			user.setName("Luis");
-			userRepository.save(user);
+			atorRepository.deleteAll();
+			Ator ator = new Ator();
+			ator.setName("aaaaaa");
+			atorRepository.save(ator);
+			Ator ator2 = new Ator();
+			ator2.setName("bbbbbbb");
+			atorRepository.save(ator2);
 		};
 	}
 }

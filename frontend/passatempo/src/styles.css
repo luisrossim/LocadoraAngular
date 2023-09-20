@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Geologica&family=Lato&family=Orbit&display=swap');
+
+.font-geologica {
+    font-family: Geologica;
+}
+
+.font-lato {
+    font-family: Lato;
+}
+
+.font-orbit {
+    font-family: Orbit;
+}
+
+.mb-100 {
+    margin-bottom: 100px;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.my-100 {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}

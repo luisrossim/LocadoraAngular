@@ -27,8 +27,8 @@ public class ClasseController {
     @Operation(description = "Pesquisar uma Classe pelo ID")
     public ResponseEntity<Classe> pesquisar(@PathVariable long id) {
         return classeRepository.findById(id)
-                .map(registro -> ResponseEntity.ok().body(registro))
-                .orElse(ResponseEntity.notFound().build());
+            .map(registro -> ResponseEntity.ok().body(registro))
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -42,24 +42,24 @@ public class ClasseController {
     public ResponseEntity<Classe> update(@PathVariable long id, @RequestBody Classe registroclasse) {
 
         return classeRepository.findById(id)
-                .map(registrobusca -> {
-                    registrobusca.setName(registroclasse.getName());
-                    registrobusca.setValue(registroclasse.getValue());
-                    registrobusca.setDate(registroclasse.getDate());
-                    Classe atualizado = classeRepository.save(registrobusca);
-                    return ResponseEntity.ok().body(atualizado);
-                })
-                .orElse(ResponseEntity.notFound().build());
+            .map(registrobusca -> {
+                registrobusca.setName(registroclasse.getName());
+                registrobusca.setValue(registroclasse.getValue());
+                registrobusca.setDate(registroclasse.getDate());
+                Classe atualizado = classeRepository.save(registrobusca);
+                return ResponseEntity.ok().body(atualizado);
+            })
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     @Operation(description = "Hard Delete de Classes")
     public ResponseEntity<Void> delete(@PathVariable long id){
         return classeRepository.findById(id)
-                .map( registrobusca -> {
-                    classeRepository.deleteById(id);
-                    return ResponseEntity.noContent().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+            .map( registrobusca -> {
+                classeRepository.deleteById(id);
+                return ResponseEntity.noContent().<Void>build();
+            })
+            .orElse(ResponseEntity.notFound().build());
     }
 }

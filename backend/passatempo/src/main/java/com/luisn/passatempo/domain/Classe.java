@@ -18,10 +18,10 @@ public class Classe {
 
     @NotNull
     @Column(nullable = false)
-    private String value;
+    private float value;
 
     @NotNull
     @Column(nullable = false)
-    private String date;
+    private int date;
 
 }

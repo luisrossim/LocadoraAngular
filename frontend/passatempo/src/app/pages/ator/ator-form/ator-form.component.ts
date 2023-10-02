@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertsService } from 'src/app/shared/services/alerts.service';
 import { AtorService } from 'src/app/core/services/ator.service';
 import { Ator } from 'src/app/models/ator';
 
@@ -23,6 +24,7 @@ export class AtorFormComponent {
     private atorService: AtorService,
     private location: Location,
     private router: Router,
+    private alerts: AlertsService,
     private route: ActivatedRoute) {
       const ator: Ator = this.route.snapshot.data['ator'];
       this.atorForm.setValue({
@@ -35,7 +37,7 @@ export class AtorFormComponent {
   handleSubmit(){
     this.atorService.salvar(this.atorForm.value).subscribe(
       resultado => this.onSuccess(), 
-      error => this.handleError()
+      error => this.handleError(error)
     );
   }
 
@@ -44,12 +46,12 @@ export class AtorFormComponent {
   }
 
   private onSuccess(){
-    alert("Ator cadastrado com sucesso!")
+    this.alerts.showSuccess('Ator cadastrado com sucesso')
     this.handleCancel();
   }
 
-  handleError(){
-    alert("Erro ao cadastrar ator!")
+  handleError(error: String){
+    this.alerts.showError('Erro ao cadastrar ator')
   }
 
 }

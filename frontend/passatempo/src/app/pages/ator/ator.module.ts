@@ -6,6 +6,9 @@ import { AtorListComponent } from './ator-list/ator-list.component';
 import { AtorFormComponent } from './ator-form/ator-form.component';
 import { AtorComponent } from './ator.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AtorRoutingModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    ConfirmDialogModule
+  ],
+  providers: [ConfirmationService]
 })
 export class AtorModule { }

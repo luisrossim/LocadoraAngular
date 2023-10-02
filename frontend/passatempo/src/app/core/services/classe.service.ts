@@ -25,20 +25,18 @@ export class ClasseService {
     return this.http.delete(`${this.API}/${id}`).pipe(first());
   }
 
-  listar() {
+  public listar() {
     return this.http.get<Classe[]>(this.API).pipe(
       first(), 
       tap(classes => console.log(classes))
     );
   }
 
-  buscarPorID(id: string) {
+  public buscarPorID(id: string) {
     return this.http.get<Classe>(`${this.API}/${id}`);
   }
 
-  salvar(registro: Partial<Classe>) {
-    // verificar se o registro ja possui um id, se nao ira criar
-    //console.log(registro);
+  public salvar(registro: Partial<Classe>) {
     if( registro.id ) {
       return this.editar(registro);
     }

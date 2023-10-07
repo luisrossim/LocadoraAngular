@@ -6,6 +6,8 @@ import { ClasseListComponent } from './classe-list/classe-list.component';
 import { ClasseFormComponent } from './classe-form/classe-form.component';
 import { ClasseComponent } from './classe.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ClasseRoutingModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    ConfirmDialogModule
+  ],
+  providers: [ConfirmationService]
 })
 export class ClasseModule { }

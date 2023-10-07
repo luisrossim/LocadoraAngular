@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { Classe } from 'src/app/models/classe';
 
 @Component({
@@ -13,7 +14,7 @@ export class ClasseListComponent {
   @Output() edit = new EventEmitter(false);
   @Output() delete = new EventEmitter(false);
 
-  constructor(){ }
+  constructor(private confirmationService: ConfirmationService){ }
 
   handleInsert() {
     this.add.emit(true);
@@ -24,7 +25,14 @@ export class ClasseListComponent {
   }
 
   handleDelete(classe: Classe){
-    this.delete.emit(classe);
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja deletar a classe ' + `<strong>${classe.name}</strong>?`,
+      header: 'Confirmação',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.delete.emit(classe);
+      },
+    });
   }
   
 }

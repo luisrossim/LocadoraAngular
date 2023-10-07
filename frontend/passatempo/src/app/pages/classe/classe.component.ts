@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, of } from 'rxjs';
 import { ClasseService } from 'src/app/core/services/classe.service';
 import { Classe } from 'src/app/models/classe';
+import { AlertsService } from 'src/app/shared/services/alerts.service';
 
 @Component({
   selector: 'app-classe',
@@ -17,7 +18,8 @@ export class ClasseComponent {
   constructor(
     private classeService: ClasseService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alerts: AlertsService
   ) {
     this.refresh();
   }
@@ -25,7 +27,7 @@ export class ClasseComponent {
   refresh(){
     this.classes$ = this.classeService.listar().pipe(
       catchError(error => {
-        alert(`Erro ao listar classes (${error})`)
+        this.alerts.showError('Algo inesperado aconteceu na listagem de classes')
         return of ([])
       })
     )
@@ -42,10 +44,10 @@ export class ClasseComponent {
   handleDelete(classe: Classe){
     this.classeService.remover(classe.id).subscribe(
       () => {
-        this.refresh();
-        alert("Classe removida com sucesso!")
+        this.alerts.showSuccess('Classe removida com sucesso'),
+        this.refresh()
       },
-      (error) => alert(error)
+      (error) => this.alerts.showError('Erro ao deletar classe')
     );
   }
 

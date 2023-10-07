@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertsService } from 'src/app/shared/services/alerts.service';
 import { DiretorService } from 'src/app/core/services/diretor.service';
 import { Diretor } from 'src/app/models/diretor';
 
@@ -22,6 +23,7 @@ export class DiretorFormComponent {
     private diretorService: DiretorService,
     private location: Location,
     private router: Router,
+    private alerts: AlertsService,
     private route: ActivatedRoute) {
       const diretor: Diretor = this.route.snapshot.data['diretor'];
       this.diretorForm.setValue({
@@ -43,12 +45,12 @@ export class DiretorFormComponent {
   }
 
   private onSuccess(){
-    alert("Diretor cadastrado com sucesso!")
+    this.alerts.showSuccess('Diretor cadastrado com sucesso')
     this.handleCancel();
   }
 
   handleError(error: String){
-    alert("Erro ao cadastrar diretor!" + `${error}` )
+    this.alerts.showError('Erro ao cadastrar diretor')
   }
 
 

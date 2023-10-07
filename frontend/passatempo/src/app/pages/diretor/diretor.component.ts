@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, of } from 'rxjs';
 import { DiretorService } from 'src/app/core/services/diretor.service';
 import { Diretor } from 'src/app/models/diretor';
+import { AlertsService } from 'src/app/shared/services/alerts.service';
 
 @Component({
   selector: 'app-diretor',
@@ -16,7 +17,8 @@ export class DiretorComponent {
   constructor(
     private diretorService: DiretorService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alerts: AlertsService
   ) {
     this.refresh();
   }
@@ -25,7 +27,7 @@ export class DiretorComponent {
   refresh(){
     this.diretores$ = this.diretorService.listar().pipe(
       catchError(error => {
-        alert(`Erro ao listar diretores (${error})`)
+        this.alerts.showError('Algo inesperado aconteceu na listagem de diretores')
         return of ([])
       })
     )
@@ -42,10 +44,10 @@ export class DiretorComponent {
   handleDelete(diretor: Diretor){
     this.diretorService.remover(diretor.id).subscribe(
       () => {
-        this.refresh();
-        alert("Diretor removido com sucesso!")
+        this.alerts.showSuccess('Diretor removido com sucesso'),
+        this.refresh()
       },
-      (error) => alert(error)
+      (error) => this.alerts.showError('Erro ao deletar diretor')
     );
   }
 }

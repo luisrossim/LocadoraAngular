@@ -13,4 +13,11 @@ export class AtorService extends CrudService<Ator> {
     super(HttpClient, 'api/ator');
   }
 
+  public salvar(registro: Partial<Ator>): Observable<Ator> {
+    if (registro.id) {
+      return this.update(registro.id, registro);
+    }
+    return this.create(registro);
+  }
+
 }

@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AtorListComponent } from './ator-list/ator-list.component';
-import { AtorFormComponent } from './ator-form/ator-form.component';
+import { AtorComponent } from './ator/ator.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AtorListComponent,
-  },
-  {
-    path: 'new',
-    component: AtorFormComponent,
-  },
+    component: AtorComponent,
+  }
 ];
 
 @NgModule({

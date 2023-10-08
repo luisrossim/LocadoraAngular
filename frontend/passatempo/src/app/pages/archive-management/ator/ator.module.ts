@@ -2,18 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AtorRoutingModule } from './ator-routing.module';
-import { AtorListComponent } from './ator-list/ator-list.component';
-import { AtorFormComponent } from './ator-form/ator-form.component';
-
+import { AtorComponent } from './ator/ator.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
-    AtorListComponent,
-    AtorFormComponent
+    AtorComponent
   ],
   imports: [
     CommonModule,
-    AtorRoutingModule
+    AtorRoutingModule,
+    SharedModule
   ]
 })
 export class AtorModule { }

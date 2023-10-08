@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AtorListComponent } from './ator-list.component';
+import { AtorComponent } from './ator.component';
 
-describe('AtorListComponent', () => {
-  let component: AtorListComponent;
-  let fixture: ComponentFixture<AtorListComponent>;
+describe('AtorComponent', () => {
+  let component: AtorComponent;
+  let fixture: ComponentFixture<AtorComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AtorListComponent]
+      declarations: [AtorComponent]
     });
-    fixture = TestBed.createComponent(AtorListComponent);
+    fixture = TestBed.createComponent(AtorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

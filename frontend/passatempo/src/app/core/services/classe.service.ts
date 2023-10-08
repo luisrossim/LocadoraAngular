@@ -9,8 +9,8 @@ import { CrudService } from './crud.service';
 })
 export class ClasseService extends CrudService<Classe> {
 
-  constructor(protected override readonly http: HttpClient) {
-    super(http, 'classe');
+  constructor(protected readonly HttpClient: HttpClient) {
+    super(HttpClient, 'api/classe');
   }
 
 }

@@ -9,8 +9,8 @@ import { CrudService } from './crud.service';
 })
 export class DiretorService extends CrudService<Diretor> {
 
-  constructor(protected override readonly http: HttpClient) {
-    super(http, 'diretor');
+  constructor(protected readonly HttpClient: HttpClient) {
+    super(HttpClient, 'api/diretor');
   }
 
 }

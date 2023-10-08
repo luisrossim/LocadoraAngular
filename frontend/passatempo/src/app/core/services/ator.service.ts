@@ -9,8 +9,8 @@ import { first, take, tap, delay, Observable } from 'rxjs';
 })
 export class AtorService extends CrudService<Ator> {
 
-  constructor(protected override readonly http: HttpClient) {
-    super(http, 'ator');
+  constructor(protected readonly HttpClient: HttpClient) {
+    super(HttpClient, 'api/ator');
   }
 
 }

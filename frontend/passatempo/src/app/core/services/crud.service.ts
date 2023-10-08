@@ -1,13 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Observable, catchError, map, throwError } from 'rxjs';
 
 export class CrudService<T> {
-  protected readonly API = `${environment.url}${this.entityName}`;
 
   constructor(
     protected readonly http: HttpClient,
-    protected readonly entityName: string
+    protected readonly API: string
   ) {}
 
 
@@ -30,4 +28,5 @@ export class CrudService<T> {
   public getById(id: number | string): Observable<T> {
     return this.http.get<T>(`${this.API}/${id}`);
   }
+  
 }

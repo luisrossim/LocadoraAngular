@@ -6,6 +6,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [],
@@ -18,7 +20,9 @@ import { ToastModule } from 'primeng/toast';
     DialogModule,
     InputTextModule,
     DynamicDialogModule,
-    ToastModule
-  ]
+    ToastModule,
+    ConfirmDialogModule
+  ],
+  providers: [ConfirmationService]
 })
 export class SharedModule { }

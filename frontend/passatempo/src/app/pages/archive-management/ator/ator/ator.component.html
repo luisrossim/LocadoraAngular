@@ -30,13 +30,16 @@
                     <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(ator)">
                         <i class="pi pi-pencil"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-outline-danger ms-1">
+                    <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(ator)">
                         <i class="pi pi-trash"></i>
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <p-confirmDialog [style]="{width: '25vw'}"></p-confirmDialog>
+
     <p-dialog header="Cadastrar novo ator" [modal]="true" [(visible)]="create" [style]="{ width: '25vw' }" (onHide)="create = false">
         <form class="mt-2" [formGroup]="atorForm">
             <input class="p-inputtext-sm" placeholder="Nome do ator" type="text" class="form-control" formControlName="name">
@@ -45,6 +48,7 @@
             <p-button icon="pi pi-check" (click)="handleCreate()" [disabled]='atorForm.invalid' label="Cadastrar" styleClass="p-button-text"></p-button>
         </ng-template>
     </p-dialog>
+
     <p-dialog header="Editar ator" [modal]="true" [(visible)]="edit" [style]="{ width: '25vw' }" (onHide)="edit = false">
         <form class="mt-2" [formGroup]="atorForm">
             <input class="p-inputtext-sm" placeholder="Nome do ator" type="text" class="form-control" formControlName="name">

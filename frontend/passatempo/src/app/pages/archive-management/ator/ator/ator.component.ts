@@ -3,13 +3,13 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { AtorService } from 'src/app/core/services/ator.service';
 import { Ator } from 'src/app/models/ator';
 import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { AlertsService } from 'src/app/shared/services/alerts.service';
 
 @Component({
   selector: 'app-ator',
   templateUrl: './ator.component.html',
-  styleUrls: ['./ator.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./ator.component.css']
 })
 export class AtorComponent {
   atores: Ator[] = []
@@ -23,7 +23,8 @@ export class AtorComponent {
   constructor(
     private atorService: AtorService,
     private formBuilder: UntypedFormBuilder,
-    private alerts: AlertsService
+    private alerts: AlertsService,
+    private confirmationService: ConfirmationService,
   ) {}
 
 
@@ -51,7 +52,7 @@ export class AtorComponent {
         this.atores = resp;
       },
       error: (error) => {
-        console.log(error);
+        this.alerts.showError('Erro na listagem de atores')
       }
     });
   }
@@ -75,6 +76,27 @@ export class AtorComponent {
         this.edit = false
       },
       error: (error) => this.alerts.showError('Erro ao editar ator!')
+    });
+  }
+
+  confirmDelete(ator: Ator){
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja deletar o ator ' + `<strong>${ator.name}</strong>?`,
+      header: 'Confirmação',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.handleDelete(ator);
+      },
+    });
+  }
+
+  handleDelete(ator: Ator){
+    this.atorService.delete(ator.id).subscribe({
+      next: (resp) => {
+        this.alerts.showSuccess('Ator removido com sucesso'),
+        this.fetchAtores()
+      },
+      error: (error) => this.alerts.showError('Erro ao deletar ator')
     });
   }
 

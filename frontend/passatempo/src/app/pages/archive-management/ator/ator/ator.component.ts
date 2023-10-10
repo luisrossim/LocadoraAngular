@@ -15,6 +15,7 @@ export class AtorComponent {
   atores: Ator[] = []
   create: boolean = false;
   edit: boolean = false;
+  ator: Ator = {id: '', name: ''};
   atorForm = this.formBuilder.group({
     id: [''],
     name: [null, [Validators.required]],
@@ -39,11 +40,12 @@ export class AtorComponent {
   }
 
   showDialogEdit(ator: Ator) {
+    this.ator = ator
     this.atorForm.setValue({
       id: ator.id,
-      name: ator.name
+      name: ''
     });
-    this.edit = true;
+    this.edit = true
   }
 
   private fetchAtores(): void {

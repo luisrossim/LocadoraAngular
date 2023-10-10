@@ -1,26 +1,24 @@
-<div class="container">
-    <table class="table table-hover">
+<div class="container border rounded">
+    <table class="table table-responsive-lg table-hover">
         <thead>
                 <tr>
-                    <td class="fw-bold">
-                        ID
-                    </td>
-                    <td class="fw-bold">
+                    <td></td>
+                    <td class="text-secondary">
                         Nome
                     </td>
                     <td align="end">
                         <button type="button" class="btn btn-sm me-1">
-                            <i class="pi pi-search"></i>
+                            <i class="pi pi-search text-secondary"></i>
                         </button>
-                        <button type="button" class="btn btn-sm ms-1" (click)="showDialogCreate()">
-                            <i class="pi pi-plus" style="color: green"></i>
+                        <button type="button" class="btn btn-sm text-success ms-1" (click)="showDialogCreate()">
+                            <i class="pi pi-plus"></i>
                         </button>
                     </td>
                 </tr>
         </thead>
         <tbody>
             <tr *ngFor='let ator of atores'>
-                <td>
+                <td class="text-secondary">
                     {{ ator.id }}
                 </td>
                 <td>
@@ -50,8 +48,9 @@
     </p-dialog>
 
     <p-dialog header="Editar ator" [modal]="true" [(visible)]="edit" [style]="{ width: '25vw' }" (onHide)="edit = false">
+        <i class="bi bi-person-fill-gear fs-5"> {{ ator.name }} </i>
         <form class="mt-2" [formGroup]="atorForm">
-            <input class="p-inputtext-sm" placeholder="Nome do ator" type="text" class="form-control" formControlName="name">
+            <input class="p-inputtext-sm" placeholder="Novo nome do ator" type="text" class="form-control" formControlName="name">
         </form>
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-check" (click)="handleUpdate()" [disabled]='atorForm.invalid' label="Editar" styleClass="p-button-text"></p-button>

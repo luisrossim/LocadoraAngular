@@ -2,6 +2,16 @@
 @import "primeicons/primeicons.css";
 @import url('https://fonts.googleapis.com/css2?family=Geologica&family=Lato&family=Orbit&display=swap');
 
+:root {
+    --main-color: #2A323D;
+}
+
+.glass-effect {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.048), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
 .font-geologica {
     font-family: Geologica;
 }

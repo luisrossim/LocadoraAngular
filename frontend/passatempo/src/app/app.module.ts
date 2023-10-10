@@ -5,13 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SidebarComponent } from './core/components/sidebar/sidebar.component';
 
-import { ToastrModule } from 'ngx-toastr';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -26,7 +25,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ConfirmDialogModule,
     ToastrModule.forRoot()
   ],
   providers: [],

@@ -1,0 +1,7 @@
+.logo {
+   transition: 0.5s;
+   transition-timing-function: cubic-bezier(1,-0.7,0,1.8);
+}
+.logo:hover {
+   rotate: 90deg;
+}

@@ -1,7 +1,10 @@
 .logo {
+   color: var(--sub-color);
    transition: 0.5s;
    transition-timing-function: cubic-bezier(1,-0.7,0,1.8);
 }
 .logo:hover {
+   color: white;
+   text-shadow: 0em 0em 0.2em white;
    rotate: 90deg;
 }

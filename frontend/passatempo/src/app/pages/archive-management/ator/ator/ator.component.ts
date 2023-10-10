@@ -93,9 +93,10 @@ export class AtorComponent {
   }
 
   handleDelete(ator: Ator){
+    this.ator = ator;
     this.atorService.delete(ator.id).subscribe({
       next: (resp) => {
-        this.alerts.showSuccess('Ator removido com sucesso'),
+        this.alerts.showSuccess('Ator ' + `${ator.name}` + ' removido com sucesso'),
         this.fetchAtores()
       },
       error: (error) => this.alerts.showError('Erro ao deletar ator')

@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [],
@@ -21,7 +22,8 @@ import { ConfirmationService } from 'primeng/api';
     InputTextModule,
     DynamicDialogModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    CardModule
   ],
   providers: [ConfirmationService]
 })

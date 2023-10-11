@@ -1,4 +1,6 @@
-export interface Diretor {
-   id: string;
-   name: string;
+export class Diretor {
+   constructor (
+      public id?: string,
+      public name?: string
+   ){}
 }

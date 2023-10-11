@@ -15,7 +15,7 @@ export class AtorComponent {
   atores: Ator[] = []
   create: boolean = false;
   edit: boolean = false;
-  ator: Ator = {id: '', name: ''};
+  ator: Ator = {}
   atorForm = this.formBuilder.group({
     id: [''],
     name: [null, [Validators.required]],
@@ -94,7 +94,7 @@ export class AtorComponent {
 
   handleDelete(ator: Ator){
     this.ator = ator;
-    this.atorService.delete(ator.id).subscribe({
+    this.atorService.delete(ator.id!).subscribe({
       next: (resp) => {
         this.alerts.showSuccess('Ator ' + `${ator.name}` + ' removido com sucesso'),
         this.fetchAtores()

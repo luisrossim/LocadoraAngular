@@ -1,1 +1,85 @@
-<p>classe works!</p>
+<div class="container">
+   <p class="text-center fw-bold font-lato fs-3 mb-4">Gerenciar Classes</p>
+</div>
+
+<div *ngIf="classes.length == 0">
+   <div class="bg-opacity-10 bg-danger rounded py-1 mb-5" style="width: 300px; margin: 0 auto">
+       <p class="text-center text-danger m-0"><i class="bi bi-info-circle-fill pe-3"></i>Não há classes cadastradas</p>
+   </div>
+</div>
+
+<div class="container border rounded mb-5">
+   <table class="table table-responsive-lg table-hover">
+         <thead>
+               <tr>
+                  <td></td>
+                  <td class="text-secondary">
+                     Nome
+                  </td>
+                  <td class="text-secondary">
+                     Valor
+                  </td>
+                  <td class="text-secondary">
+                     Data Devolução
+                  </td>
+                  <td align="end">
+                        <button type="button" class="btn btn-sm me-1">
+                              <i class="pi pi-search text-secondary-emphasis"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm text-success-emphasis ms-1" (click)="showDialogCreate()">
+                              <i class="pi pi-plus"></i>
+                        </button>
+                  </td>
+               </tr>
+         </thead>
+      <tbody>
+           <tr *ngFor='let classe of classes'>
+               <td class="text-secondary">
+                  {{ classe.id }}
+               </td>
+               <td>
+                  {{ classe.name }}
+               </td>
+               <td>
+                  {{ classe.value }}
+               </td>
+               <td>
+                  {{ classe.date }}
+               </td>
+               <td align="end">
+                   <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(classe)">
+                       <i class="pi pi-pencil"></i>
+                   </button>
+                   <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(classe)">
+                       <i class="pi pi-trash"></i>
+                   </button>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+
+   <p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>
+
+   <p-dialog header="Cadastrar nova classe" [modal]="true" [(visible)]="create" [style]="{ width: '30vw' }" (onHide)="create = false">
+       <form class="mt-2 d-flex flex-column gap-2" [formGroup]="classeForm">
+           <input class="p-inputtext-sm" placeholder="Nome da classe" type="text" class="form-control" formControlName="name">
+           <input class="p-inputtext-sm" placeholder="Valor" type="number" class="form-control" formControlName="value">
+           <input class="p-inputtext-sm" placeholder="Data de devolução" type="number" class="form-control" formControlName="date">
+       </form>
+       <ng-template pTemplate="footer">
+           <p-button icon="pi pi-check" (click)="handleCreate()" [disabled]='classeForm.invalid' label="Cadastrar" styleClass="p-button-text"></p-button>
+       </ng-template>
+   </p-dialog>
+
+   <p-dialog header="Editar classe" [modal]="true" [(visible)]="edit" [style]="{ width: '30vw' }" (onHide)="edit = false">
+       <i class="bi bi-person-fill-gear fs-5"> {{ classe.name }} </i>
+       <form class="mt-2  d-flex flex-column gap-2" [formGroup]="classeForm">
+           <input class="p-inputtext-sm" placeholder="Novo nome da classe" type="text" class="form-control" formControlName="name">
+           <input class="p-inputtext-sm" placeholder="Valor" type="number" class="form-control" formControlName="value">
+           <input class="p-inputtext-sm" placeholder="Data de devolução" type="number" class="form-control" formControlName="date">
+       </form>
+       <ng-template pTemplate="footer">
+           <p-button icon="pi pi-check" (click)="handleUpdate()" [disabled]='classeForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+       </ng-template>
+   </p-dialog>
+</div>

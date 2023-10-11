@@ -13,4 +13,11 @@ export class DiretorService extends CrudService<Diretor> {
     super(HttpClient, 'api/diretor');
   }
 
+  public salvar(registro: Partial<Diretor>): Observable<Diretor> {
+    if (registro.id) {
+      return this.update(registro.id, registro);
+    }
+    return this.create(registro);
+  }
+
 }

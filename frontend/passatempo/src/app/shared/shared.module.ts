@@ -1,17 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
-  declarations: [
-    ConfirmModalComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
   ],
   exports: [
-    ConfirmModalComponent,
-  ]
+    ReactiveFormsModule,
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    DynamicDialogModule,
+    ToastModule,
+    ConfirmDialogModule,
+    CardModule
+  ],
+  providers: [ConfirmationService]
 })
 export class SharedModule { }

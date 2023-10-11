@@ -1,4 +1,6 @@
-export interface Ator {
-   id: string;
-   name: string;
+export class Ator {
+   constructor (
+      public id?: string,
+      public name?: string
+   ){}
 }

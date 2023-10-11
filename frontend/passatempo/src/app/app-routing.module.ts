@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './core/components/home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -8,16 +8,16 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'ator',
-    loadChildren: () => import('./pages/ator/ator.module').then(m => m.AtorModule)
+    path: 'management',
+    loadChildren: () => import('./pages/archive-management/archive-management.module').then((m) => m.ArchiveManagementModule),
   },
   {
-    path: 'classe',
-    loadChildren: () => import('./pages/classe/classe.module').then(m => m.ClasseModule)
+    path: 'login',
+    loadChildren: () => import('./pages/access/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'diretor',
-    loadChildren: () => import('./pages/diretor/diretor.module').then(m => m.DiretorModule)
+    path: 'register',
+    loadChildren: () => import('./pages/access/register/register.module').then((m) => m.RegisterModule),
   }
 ];
 

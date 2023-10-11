@@ -2,44 +2,22 @@ import { Injectable } from '@angular/core';
 import { Diretor } from '../../models/diretor';
 import { HttpClient } from '@angular/common/http';
 import { first, take, tap, delay, Observable } from 'rxjs';
+import { CrudService } from './crud.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DiretorService {
+export class DiretorService extends CrudService<Diretor> {
 
-  private readonly API = 'api/diretor';
-
-  constructor(private http: HttpClient) { }
-
-
-  private cadastrar(registro: Partial<Diretor>): Observable<Diretor> {
-    return this.http.post<Diretor>(this.API, registro).pipe(first());
-  }
-
-  private editar(registro: Partial<Diretor>): Observable<Diretor> {
-    return this.http.put<Diretor>(`${this.API}/${registro.id}`, registro).pipe(first());
-  }
-
-  public remover(id: string) {
-    return this.http.delete(`${this.API}/${id}`).pipe(first());
-  }
-
-  public listar() {
-    return this.http.get<Diretor[]>(this.API).pipe(
-      first(), 
-      tap(diretores => console.log(diretores))
-    );
-  }
-
-  public buscarPorID(id: string) {
-    return this.http.get<Diretor>(`${this.API}/${id}`);
+  constructor(protected readonly HttpClient: HttpClient) {
+    super(HttpClient, 'api/diretor');
   }
 
   public salvar(registro: Partial<Diretor>): Observable<Diretor> {
-    if( registro.id ) {
-      return this.editar(registro);
+    if (registro.id) {
+      return this.update(registro.id, registro);
     }
-    return this.cadastrar(registro);
+    return this.create(registro);
   }
+
 }

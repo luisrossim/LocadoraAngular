@@ -1,6 +1,7 @@
 package com.luisn.passatempo.controller;
 
 import com.luisn.passatempo.domain.Classe;
+import com.luisn.passatempo.dto.ClasseDTO;
 import com.luisn.passatempo.service.ClasseService;
 import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,26 +24,26 @@ public class ClasseController {
 
     @GetMapping
     @Operation(description = "Listar as Classes")
-    public @ResponseBody List<Classe> list() {
+    public @ResponseBody List<ClasseDTO> list() {
         return classeService.list();
     }
 
     @GetMapping("/{id}")
     @Operation(description = "Pesquisar uma Classe pelo ID")
-    public Classe pesquisar(@PathVariable Long id) {
+    public ClasseDTO pesquisar(@PathVariable Long id) {
         return classeService.pesquisar(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(description = "Create de Classes")
-    public Classe create(@RequestBody @Valid Classe classe) {
+    public ClasseDTO create(@RequestBody @Valid ClasseDTO classe) {
         return classeService.create(classe);
     }
 
     @PutMapping("/{id}")
     @Operation(description = "Update de Classes")
-    public Classe update(@PathVariable Long id, @RequestBody @Valid Classe classe) {
+    public ClasseDTO update(@PathVariable Long id, @RequestBody @Valid ClasseDTO classe) {
         return classeService.update(id, classe);
     }
 

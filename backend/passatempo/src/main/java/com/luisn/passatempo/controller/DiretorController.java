@@ -1,6 +1,7 @@
 package com.luisn.passatempo.controller;
 
 import com.luisn.passatempo.domain.Diretor;
+import com.luisn.passatempo.dto.DiretorDTO;
 import com.luisn.passatempo.service.DiretorService;
 import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,26 +24,26 @@ public class DiretorController {
 
     @GetMapping
     @Operation(description = "Listar os Diretores")
-    public @ResponseBody List<Diretor> list() {
+    public @ResponseBody List<DiretorDTO> list() {
         return diretorService.list();
     }
 
     @GetMapping("/{id}")
     @Operation(description = "Pesquisar um Diretor pelo ID")
-    public Diretor pesquisar(@PathVariable Long id) {
+    public DiretorDTO pesquisar(@PathVariable Long id) {
         return diretorService.pesquisar(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(description = "Create de Diretores")
-    public Diretor create(@RequestBody @Valid Diretor diretor) {
+    public DiretorDTO create(@RequestBody @Valid DiretorDTO diretor) {
         return diretorService.create(diretor);
     }
 
     @PutMapping("/{id}")
     @Operation(description = "Update de Diretores")
-    public Diretor update(@PathVariable Long id, @RequestBody @Valid Diretor diretor) {
+    public DiretorDTO update(@PathVariable Long id, @RequestBody @Valid DiretorDTO diretor) {
         return diretorService.update(id, diretor);
     }
 

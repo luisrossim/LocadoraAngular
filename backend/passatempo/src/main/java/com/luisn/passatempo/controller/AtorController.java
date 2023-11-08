@@ -1,6 +1,6 @@
 package com.luisn.passatempo.controller;
 
-import com.luisn.passatempo.domain.Ator;
+import com.luisn.passatempo.dto.AtorDTO;
 import com.luisn.passatempo.service.AtorService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -24,14 +24,14 @@ public class AtorController {
 
     @GetMapping
     @Operation(description = "Listar os Atores")
-    public @ResponseBody List<Ator> list() {
+    public @ResponseBody List<AtorDTO> list() {
         return atorService.list();
     }
 
 
     @GetMapping("/{id}")
     @Operation(description = "Pesquisar um Ator pelo ID")
-    public Ator pesquisar(@PathVariable Long id) {
+    public AtorDTO pesquisar(@PathVariable Long id) {
         return atorService.pesquisar(id);
     }
 
@@ -39,14 +39,14 @@ public class AtorController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(description = "Create de Atores")
-    public Ator create(@RequestBody @Valid Ator ator) {
+    public AtorDTO create(@RequestBody @Valid AtorDTO ator) {
         return atorService.create(ator);
     }
 
 
     @PutMapping("/{id}")
     @Operation(description = "Update de Atores")
-    public Ator update(@PathVariable Long id, @RequestBody @Valid Ator ator) {
+    public AtorDTO update(@PathVariable Long id, @RequestBody @Valid AtorDTO ator) {
         return atorService.update(id, ator);
     }
 

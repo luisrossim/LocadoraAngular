@@ -3,11 +3,11 @@ package com.luisn.passatempo.controller;
 import com.luisn.passatempo.domain.Classe;
 import com.luisn.passatempo.service.ClasseService;
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/classe")
 @RequiredArgsConstructor
+@Tag(name = "ClasseController", description = "Fornece o CRUD para gerenciamento de classes")
 public class ClasseController {
 
     private final ClasseService classeService;
@@ -28,10 +29,8 @@ public class ClasseController {
 
     @GetMapping("/{id}")
     @Operation(description = "Pesquisar uma Classe pelo ID")
-    public ResponseEntity<Classe> pesquisar(@PathVariable Long id) {
-        return classeService.pesquisar(id)
-            .map(registro -> ResponseEntity.ok().body(registro))
-            .orElse(ResponseEntity.notFound().build());
+    public Classe pesquisar(@PathVariable Long id) {
+        return classeService.pesquisar(id);
     }
 
     @PostMapping
@@ -43,19 +42,14 @@ public class ClasseController {
 
     @PutMapping("/{id}")
     @Operation(description = "Update de Classes")
-    public ResponseEntity<Classe> update(@PathVariable Long id, @RequestBody @Valid Classe classe) {
-        return classeService.update(id, classe)
-                .map(registrobusca -> ResponseEntity.ok().body(registrobusca))
-                .orElse(ResponseEntity.notFound().build());
+    public Classe update(@PathVariable Long id, @RequestBody @Valid Classe classe) {
+        return classeService.update(id, classe);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(description = "Hard Delete de Classes")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        if (classeService.delete(id)) {
-            return ResponseEntity.noContent().<Void>build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public void delete(@PathVariable Long id){
+        classeService.delete(id);
     }
 }

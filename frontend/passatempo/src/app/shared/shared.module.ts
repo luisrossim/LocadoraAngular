@@ -9,6 +9,9 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms'; 
 
 @NgModule({
   declarations: [],
@@ -23,7 +26,10 @@ import { CardModule } from 'primeng/card';
     DynamicDialogModule,
     ToastModule,
     ConfirmDialogModule,
-    CardModule
+    CardModule,
+    MultiSelectModule,
+    DropdownModule,
+    FormsModule
   ],
   providers: [ConfirmationService]
 })

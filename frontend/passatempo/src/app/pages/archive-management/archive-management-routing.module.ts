@@ -4,6 +4,7 @@ import { ArchiveManagementComponent } from './archive-management.component';
 import { AtorComponent } from './ator/ator.component';
 import { ClasseComponent } from './classe/classe.component';
 import { DiretorComponent } from './diretor/diretor.component';
+import { TituloComponent } from './titulo/titulo.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'diretor',
     component: DiretorComponent
+  },
+  {
+    path: 'titulo',
+    component: TituloComponent
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

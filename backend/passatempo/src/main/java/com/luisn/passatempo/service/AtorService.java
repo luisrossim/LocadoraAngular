@@ -1,7 +1,7 @@
 package com.luisn.passatempo.service;
 
 import com.luisn.passatempo.dto.AtorDTO;
-import com.luisn.passatempo.dto.mapper.AtorMapper;
+import com.luisn.passatempo.mapper.AtorMapper;
 import com.luisn.passatempo.exception.RecordNotFoundException;
 import com.luisn.passatempo.repository.AtorRepository;
 import jakarta.validation.Valid;

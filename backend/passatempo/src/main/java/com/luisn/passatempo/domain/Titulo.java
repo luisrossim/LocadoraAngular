@@ -34,4 +34,7 @@ public class Titulo {
     @ManyToOne
     @JoinColumn(name = "id_classe")
     private Classe classe;
+
+    @OneToMany(mappedBy = "titulo")
+    private List<Item> listaItens;
 }

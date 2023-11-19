@@ -1,7 +1,7 @@
 package com.luisn.passatempo.service;
 
 import com.luisn.passatempo.dto.DiretorDTO;
-import com.luisn.passatempo.dto.mapper.DiretorMapper;
+import com.luisn.passatempo.mapper.DiretorMapper;
 import com.luisn.passatempo.exception.RecordNotFoundException;
 import com.luisn.passatempo.repository.DiretorRepository;
 import jakarta.validation.Valid;

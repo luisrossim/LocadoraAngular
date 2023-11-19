@@ -2,7 +2,7 @@ package com.luisn.passatempo.service;
 
 import com.luisn.passatempo.domain.Titulo;
 import com.luisn.passatempo.dto.TituloDTO;
-import com.luisn.passatempo.dto.mapper.TituloMapper;
+import com.luisn.passatempo.mapper.TituloMapper;
 import com.luisn.passatempo.exception.RecordNotFoundException;
 import com.luisn.passatempo.repository.TituloRepository;
 import jakarta.validation.Valid;

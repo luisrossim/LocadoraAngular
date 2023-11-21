@@ -1,0 +1,93 @@
+<div class="container">
+   <p class="text-center fw-bold font-lato fs-3 mb-5">Gerenciar Itens</p>
+</div>
+
+<div *ngIf="titulos.length == 0">
+   <div class="bg-opacity-10 bg-danger rounded py-1 mb-5" style="width: 300px; margin: 0 auto">
+       <p class="text-center text-danger m-0"><i class="bi bi-info-circle-fill pe-3"></i>Não há itens cadastradas</p>
+   </div>
+</div>
+
+<div class="container border rounded mb-5">
+   <table class="table table-responsive-lg table-hover">
+        <thead>
+            <tr>
+                <td></td>
+                <td class="text-secondary">
+                    N° Série
+                </td>
+                <td class="text-secondary">
+                    Data Aquisição
+                </td>
+                <td class="text-secondary">
+                    Tipo
+                </td>
+                <td class="text-secondary">
+                    Titulo
+                </td>
+                <td align="end">
+                    <button type="button" class="btn btn-sm me-1">
+                            <i class="pi pi-search text-secondary-emphasis"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm text-success-emphasis ms-1" (click)="showDialogCreate()">
+                            <i class="pi pi-plus"></i>
+                    </button>
+                </td>
+            </tr>
+        </thead>
+      <tbody>
+           <tr *ngFor='let item of itens'>
+                <td class="text-secondary">
+                    {{ item.id }}
+                </td>
+                <td>
+                    {{ item.num_serie }}
+                </td>
+                <td>
+                    {{ item.dt_aquisicao }}
+                </td>
+                <td>
+                    {{ item.tipo }}
+                </td>
+                <td>
+                    {{ item.titulo?.name }}
+                </td>
+               <td align="end"> 
+                   <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(item)">
+                       <i class="pi pi-pencil"></i>
+                   </button>
+                   <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(item)">
+                       <i class="pi pi-trash"></i>
+                   </button>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+
+    <p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>
+
+    <p-dialog header="Cadastrar novo item" [modal]="true" [(visible)]="create" [style]="{ width: '50vw', height: '40vw'}" (onHide)="create = false">
+        <form class="mt-2 d-flex flex-column gap-2" [formGroup]="itemForm">
+            <input class="p-inputtext-sm" placeholder="Número de série" type="text" class="form-control" formControlName="num_serie">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data Aquisição" mask="99/99/9999" formControlName="dt_aquisicao"></p-inputMask>
+            <input class="p-inputtext-sm" placeholder="Tipo" type="text" class="form-control" formControlName="tipo">
+            <p-dropdown [style]="{ width: '100%'}" [options]="titulos" [filter]="true" [showClear]="true" formControlName="titulo" optionLabel="name" placeholder="Título"></p-dropdown>
+        </form>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="handleCreate()" [disabled]='itemForm.invalid' label="Cadastrar" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+
+    <p-dialog header="Editar item" [modal]="true" [(visible)]="edit" [style]="{ width: '50vw', height: '40vw'}" (onHide)="edit = false">
+        <i class="bi bi-person-fill-gear fs-5"> {{ item.num_serie }} </i>
+        <form class="mt-2  d-flex flex-column gap-2" [formGroup]="itemForm">
+            <input class="p-inputtext-sm" placeholder="Número de série" type="text" class="form-control" formControlName="num_serie">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data Aquisição" mask="99/99/9999" formControlName="dt_aquisicao"></p-inputMask>
+            <input class="p-inputtext-sm" placeholder="Tipo" type="text" class="form-control" formControlName="tipo">
+            <p-dropdown [style]="{ width: '100%'}" [options]="titulos" formControlName="titulo" optionLabel="name" placeholder="Título"></p-dropdown>
+        </form>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="handleUpdate()" [disabled]='itemForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>

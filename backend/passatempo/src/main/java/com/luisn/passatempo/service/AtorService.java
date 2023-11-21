@@ -1,15 +1,16 @@
 package com.luisn.passatempo.service;
 
-import com.luisn.passatempo.domain.Ator;
+import com.luisn.passatempo.dto.AtorDTO;
+import com.luisn.passatempo.mapper.AtorMapper;
+import com.luisn.passatempo.exception.RecordNotFoundException;
 import com.luisn.passatempo.repository.AtorRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Validated
 @RequiredArgsConstructor
@@ -17,39 +18,34 @@ import java.util.Optional;
 public class AtorService {
 
     private final AtorRepository atorRepository;
+    private final AtorMapper atorMapper;
 
-
-    public List<Ator> list() {
-        return atorRepository.findAll();
+    public List<AtorDTO> list() {
+        return atorRepository.findAll().stream()
+                .map(atorMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-
-    public Optional<Ator> pesquisar(@PathVariable Long id) {
-        return atorRepository.findById(id);
+    public AtorDTO pesquisar(@PathVariable Long id) {
+        return atorRepository.findById(id).map(atorMapper::toDTO)
+                .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-
-    public Ator create(@Valid Ator ator) {
-        return atorRepository.save(ator);
+    public AtorDTO create(@Valid AtorDTO ator) {
+        return atorMapper.toDTO(atorRepository.save(atorMapper.toEntity(ator)));
     }
 
-
-    public Optional<Ator> update(Long id, @Valid Ator ator) {
+    public AtorDTO update(Long id, @Valid AtorDTO ator) {
         return atorRepository.findById(id)
             .map(registrobusca -> {
-                registrobusca.setName(ator.getName());
-                return atorRepository.save(ator);
-            });
+                registrobusca.setName(ator.name());
+                return atorMapper.toDTO(atorRepository.save(registrobusca));
+            }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-
-    public boolean delete(@PathVariable Long id){
-        return atorRepository.findById(id)
-            .map( registrobusca -> {
-                atorRepository.deleteById(id);
-                return true;
-            })
-            .orElse(false);
+    public void delete(@PathVariable Long id){
+        atorRepository.delete(atorRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id)));
     }
 
 }

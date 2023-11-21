@@ -47,6 +47,8 @@ public class TituloService {
                     registrobusca.setSinopse(tituloDTO.sinopse());
                     registrobusca.setCategoria(tituloDTO.categoria());
                     registrobusca.getListaAtores().clear();
+                    registrobusca.setDiretor(titulo.getDiretor());
+                    registrobusca.setClasse(titulo.getClasse());
                     titulo.getListaAtores().forEach(registrobusca.getListaAtores()::add);
                     return tituloMapper.toDTO(tituloRepository.save(registrobusca));
                 }).orElseThrow(() -> new RecordNotFoundException(id));

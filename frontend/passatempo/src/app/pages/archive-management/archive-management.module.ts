@@ -8,6 +8,7 @@ import { ClasseComponent } from './classe/classe.component';
 import { DiretorComponent } from './diretor/diretor.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TituloComponent } from './titulo/titulo.component';
+import { ItemComponent } from './item/item.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TituloComponent } from './titulo/titulo.component';
     AtorComponent,
     ClasseComponent,
     DiretorComponent,
-    TituloComponent
+    TituloComponent,
+    ItemComponent
   ],
   imports: [
     CommonModule,

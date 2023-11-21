@@ -5,6 +5,7 @@ import { AtorComponent } from './ator/ator.component';
 import { ClasseComponent } from './classe/classe.component';
 import { DiretorComponent } from './diretor/diretor.component';
 import { TituloComponent } from './titulo/titulo.component';
+import { ItemComponent } from './item/item.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'titulo',
     component: TituloComponent
+  },
+  {
+    path: 'item',
+    component: ItemComponent
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

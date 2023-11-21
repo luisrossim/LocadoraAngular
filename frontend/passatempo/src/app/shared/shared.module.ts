@@ -11,7 +11,8 @@ import { ConfirmationService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   declarations: [],
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     CardModule,
     MultiSelectModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    InputMaskModule
   ],
   providers: [ConfirmationService]
 })

@@ -10,10 +10,6 @@ public interface ItemMapper {
 
     ItemDTO toDTO(Item item);
 
-    List<ItemDTO> toDTO(List<Item> entidades);
-
     Item toEntity(ItemDTO dto);
-
-    List<Item> toEntity(List<ItemDTO> dtos);
     
 }

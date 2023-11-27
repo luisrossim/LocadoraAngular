@@ -11,9 +11,6 @@ public interface TituloMapper {
 
     TituloDTO toDTO(Titulo titulo);
 
-    List<TituloDTO> toDTO(List<Titulo> entidades);
-
     Titulo toEntity(TituloDTO dto);
 
-    List<Titulo> toEntity(List<TituloDTO> dtos);
 }

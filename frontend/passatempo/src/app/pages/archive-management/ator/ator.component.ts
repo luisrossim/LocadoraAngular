@@ -34,17 +34,14 @@ export class AtorComponent {
   }
 
   showDialogCreate() {
-    this.atorForm.controls['id'].setValue('');
-    this.atorForm.controls['name'].setValue('');
+    this.atorForm.reset();
     this.create = true;
   }
 
   showDialogEdit(ator: Ator) {
     this.ator = ator
-    this.atorForm.setValue({
-      id: ator.id,
-      name: ''
-    });
+    this.atorForm.controls['id'].setValue(ator.id);
+    this.atorForm.controls['name'].setValue(ator.name);
     this.edit = true
   }
 

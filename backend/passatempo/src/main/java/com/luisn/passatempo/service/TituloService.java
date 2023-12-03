@@ -41,15 +41,7 @@ public class TituloService {
     public TituloDTO update(Long id, @Valid TituloDTO tituloDTO) {
         return tituloRepository.findById(id)
                 .map(registrobusca -> {
-                    Titulo titulo = tituloMapper.toEntity(tituloDTO);
-                    registrobusca.setName(tituloDTO.name());
-                    registrobusca.setAno(tituloDTO.ano());
-                    registrobusca.setSinopse(tituloDTO.sinopse());
-                    registrobusca.setCategoria(tituloDTO.categoria());
-                    registrobusca.getListaAtores().clear();
-                    registrobusca.setDiretor(titulo.getDiretor());
-                    registrobusca.setClasse(titulo.getClasse());
-                    titulo.getListaAtores().forEach(registrobusca.getListaAtores()::add);
+                    registrobusca = tituloMapper.toEntity(tituloDTO);
                     return tituloMapper.toDTO(tituloRepository.save(registrobusca));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

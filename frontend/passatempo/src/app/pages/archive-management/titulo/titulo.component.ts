@@ -58,14 +58,7 @@ export class TituloComponent {
   }
 
   showDialogCreate() {
-    this.tituloForm.controls['id'].setValue('');
-    this.tituloForm.controls['name'].setValue('');
-    this.tituloForm.controls['ano'].setValue('');
-    this.tituloForm.controls['sinopse'].setValue('');
-    this.tituloForm.controls['categoria'].setValue('');
-    this.tituloForm.controls['listaAtores'].setValue('');
-    this.tituloForm.controls['classe'].setValue('');
-    this.tituloForm.controls['diretor'].setValue('');
+    this.tituloForm.reset();
     this.create = true;
   }
 

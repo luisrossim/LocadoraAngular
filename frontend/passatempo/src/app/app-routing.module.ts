@@ -8,8 +8,12 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'management',
+    path: 'acervo',
     loadChildren: () => import('./pages/archive-management/archive-management.module').then((m) => m.ArchiveManagementModule),
+  },
+  {
+    path: 'cliente',
+    loadChildren: () => import('./pages/client-management/client-management.module').then((m) =>m.ClientManagementModule),
   },
   {
     path: 'login',

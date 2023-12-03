@@ -35,21 +35,16 @@ export class ClasseComponent {
   }
 
   showDialogCreate() {
-    this.classeForm.controls['id'].setValue('');
-    this.classeForm.controls['name'].setValue('');
-    this.classeForm.controls['value'].setValue('');
-    this.classeForm.controls['date'].setValue('');
+    this.classeForm.reset();
     this.create = true;
   }
 
   showDialogEdit(classe: Classe) {
     this.classe = classe
-    this.classeForm.setValue({
-      id: classe.id,
-      name: '',
-      value: '',
-      date: ''
-    });
+    this.classeForm.controls['id'].setValue(classe.id);
+    this.classeForm.controls['name'].setValue(classe.name);
+    this.classeForm.controls['value'].setValue(classe.value);
+    this.classeForm.controls['date'].setValue(classe.date);
     this.edit = true
   }
 

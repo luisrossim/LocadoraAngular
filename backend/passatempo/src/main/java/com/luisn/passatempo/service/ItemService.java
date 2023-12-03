@@ -40,11 +40,7 @@ public class ItemService {
     public ItemDTO update(Long id, @Valid ItemDTO itemDTO) {
         return itemRepository.findById(id)
                 .map(registrobusca -> {
-                    Item item = itemMapper.toEntity(itemDTO);
-                    registrobusca.setNum_serie(itemDTO.num_serie());
-                    registrobusca.setDt_aquisicao(itemDTO.dt_aquisicao());
-                    registrobusca.setTipo(itemDTO.tipo());
-                    registrobusca.setTitulo(item.getTitulo());
+                    registrobusca = itemMapper.toEntity(itemDTO);
                     return itemMapper.toDTO(itemRepository.save(registrobusca));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

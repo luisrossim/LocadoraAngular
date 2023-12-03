@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Cliente {
+public abstract class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +19,11 @@ public class Cliente {
     private String name;
 
     @Temporal(TemporalType.DATE)
-    private Date dt_nascimento;
+    private String dt_nascimento;
 
     @Column
     private String sexo;
 
     @Column
     private boolean ativo;
-
 }

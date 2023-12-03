@@ -38,7 +38,7 @@ public class AtorService {
     public AtorDTO update(Long id, @Valid AtorDTO ator) {
         return atorRepository.findById(id)
             .map(registrobusca -> {
-                registrobusca.setName(ator.name());
+                registrobusca = atorMapper.toEntity(ator);
                 return atorMapper.toDTO(atorRepository.save(registrobusca));
             }).orElseThrow(() -> new RecordNotFoundException(id));
     }

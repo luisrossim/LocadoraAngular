@@ -46,6 +46,7 @@ export class DependenteComponent {
 
   showDialogCreate() {
     this.dependenteForm.reset();
+    this.dependenteForm.controls['ativo'].setValue(true);
     this.create = true;
   }
 
@@ -88,7 +89,7 @@ export class DependenteComponent {
         this.fetchDependentes()
         this.create = false
       },
-      error: (error) => this.alerts.showError('Erro ao cadastrar dependente!')
+      error: (error) => this.alerts.showError(error.error)
     });
   }
 
@@ -105,7 +106,7 @@ export class DependenteComponent {
 
   confirmDelete(dependente: Dependente){
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja deletar o dependente ' + `<strong>${dependente.name}</strong>?`,
+      message: 'Tem certeza que deseja desativar o dependente ' + `<strong>${dependente.name}</strong>?`,
       header: 'Confirmação',
       icon: 'pi pi-info-circle',
       accept: () => {
@@ -118,10 +119,10 @@ export class DependenteComponent {
     this.dependente = dependente;
     this.dependenteService.delete(dependente.id!).subscribe({
       next: (resp) => {
-        this.alerts.showSuccess('Dependente ' + `${dependente.name}` + ' removido com sucesso'),
+        this.alerts.showSuccess('Dependente ' + `${dependente.name}` + ' desativado com sucesso'),
         this.fetchDependentes()
       },
-      error: (error) => this.alerts.showError('Erro ao deletar dependente')
+      error: (error) => this.alerts.showError('Erro ao desativar dependente')
     });
   }
 }

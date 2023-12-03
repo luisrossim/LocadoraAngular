@@ -37,7 +37,7 @@
         </thead>
       <tbody>
            <tr *ngFor='let dependente of dependentes'>
-                <td class="text-secondary">
+                <td [ngClass]="{'bg-danger bg-opacity-25': !dependente.ativo}" class="text-secondary">
                     {{ dependente.id }}
                 </td>
                 <td>

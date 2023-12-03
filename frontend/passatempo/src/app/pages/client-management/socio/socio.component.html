@@ -43,7 +43,7 @@
         </thead>
       <tbody>
            <tr *ngFor='let socio of socios'>
-                <td class="text-secondary">
+                <td [ngClass]="{'bg-danger bg-opacity-25': !socio.ativo}" class="text-secondary">
                     {{ socio.id }}
                 </td>
                 <td>

@@ -3,13 +3,13 @@ package com.luisn.passatempo.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Cliente {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +26,7 @@ public abstract class Cliente {
 
     @Column
     private boolean ativo;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Locacao> locacoes;
 }

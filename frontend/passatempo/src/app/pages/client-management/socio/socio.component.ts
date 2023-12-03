@@ -43,6 +43,7 @@ export class SocioComponent {
 
   showDialogCreate() {
     this.socioForm.reset();
+    this.socioForm.controls['ativo'].setValue(true);
     this.create = true;
   }
 
@@ -93,7 +94,7 @@ export class SocioComponent {
 
   confirmDelete(socio: Socio){
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja deletar o socio ' + `<strong>${socio.name}</strong>?`,
+      message: 'Tem certeza que deseja desativar o socio ' + `<strong>${socio.name}</strong>?`,
       header: 'Confirmação',
       icon: 'pi pi-info-circle',
       accept: () => {
@@ -106,10 +107,10 @@ export class SocioComponent {
     this.socio = socio;
     this.socioService.delete(socio.id!).subscribe({
       next: (resp) => {
-        this.alerts.showSuccess('Sócio ' + `${socio.name}` + ' removido com sucesso'),
+        this.alerts.showSuccess('Sócio ' + `${socio.name}` + ' desativado com sucesso'),
         this.fetchSocios()
       },
-      error: (error) => this.alerts.showError('Erro ao deletar socio')
+      error: (error) => this.alerts.showError('Erro ao desativar socio')
     });
   }
 }

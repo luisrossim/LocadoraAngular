@@ -45,7 +45,7 @@ public class SocioController {
 
 
     @PutMapping("/{id}")
-    @Operation(description = "Update de Sócios")
+    @Operation(description = "Update de Sócios e Tornar Sócio Ativo")
     public SocioDTO update(@PathVariable Long id, @RequestBody @Valid SocioDTO socio) {
         return socioService.update(id, socio);
     }
@@ -53,9 +53,9 @@ public class SocioController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @Operation(description = "Hard Delete de Sócios")
+    @Operation(description = "Soft Delete de Sócios")
     public void delete(@PathVariable Long id){
-        socioService.delete(id);
+        socioService.desativar(id);
     }
 
 }

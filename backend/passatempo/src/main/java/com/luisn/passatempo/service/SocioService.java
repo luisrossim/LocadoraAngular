@@ -49,9 +49,14 @@ public class SocioService {
     }
 
 
-    public void delete(@PathVariable Long id){
-        socioRepository.delete(socioRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException(id)));
+    public void desativar(@PathVariable Long id){
+        socioRepository.findById(id)
+                .map(registro -> {
+                    registro.setAtivo(false);
+                    for(Dependente dependente : registro.getDependentes()) {
+                        dependente.setAtivo(false); }
+                    return socioRepository.save(registro);
+                }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
 }

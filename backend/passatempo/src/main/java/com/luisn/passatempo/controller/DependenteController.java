@@ -45,7 +45,7 @@ public class DependenteController {
 
 
     @PutMapping("/{id}")
-    @Operation(description = "Update de Dependentes")
+    @Operation(description = "Update de Dependentes e Tornar Dependente Ativo")
     public DependenteDTO update(@PathVariable Long id, @RequestBody @Valid DependenteDTO dependente) {
         return dependenteService.update(id, dependente);
     }
@@ -53,9 +53,9 @@ public class DependenteController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @Operation(description = "Hard Delete de Dependentes")
+    @Operation(description = "Soft Delete de Dependentes")
     public void delete(@PathVariable Long id){
-        dependenteService.delete(id);
+        dependenteService.desativar(id);
     }
 
 }

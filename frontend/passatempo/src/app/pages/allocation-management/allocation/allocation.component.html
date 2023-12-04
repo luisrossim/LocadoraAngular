@@ -1,0 +1,117 @@
+<div class="container">
+   <p class="text-center fw-bold font-lato fs-3 mb-5">Efetuar Locação</p>
+</div>
+
+<div *ngIf="locacoes.length == 0">
+   <div class="bg-opacity-10 bg-danger rounded py-1 mb-5" style="width: 300px; margin: 0 auto">
+       <p class="text-center text-danger m-0"><i class="bi bi-info-circle-fill pe-3"></i>Não há locações efetuadas</p>
+   </div>
+</div>
+
+<div class="container border rounded mb-5">
+   <table class="table table-responsive-lg table-hover">
+        <thead>
+            <tr>
+                <td></td>
+                <td class="text-secondary">
+                    Data de Locação
+                </td>
+                <td class="text-secondary">
+                    Data de Devolução Prevista
+                </td>
+                <td class="text-secondary">
+                    Data de Devolução Efetuada
+                </td>
+                <td class="text-secondary">
+                    Valor
+                </td>
+                <td class="text-secondary">
+                    Multa
+                </td>
+                <td class="text-secondary">
+                    Item
+                </td>
+                <td class="text-secondary">
+                    Cliente
+                </td>
+                <td align="end">
+                    <button type="button" class="btn btn-sm me-1">
+                            <i class="pi pi-search text-secondary-emphasis"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm text-success-emphasis ms-1" (click)="showDialogCreate()">
+                            <i class="pi pi-plus"></i>
+                    </button>
+                </td>
+            </tr>
+        </thead>
+      <tbody>
+           <tr *ngFor='let locacao of locacoes'>
+                <td [ngClass]="[locacao.dtDevolucaoEfetiva == null ? 'bg-warning bg-opacity-25' : 'bg-success bg-opacity-25']"
+                    class="text-secondary">
+                    {{ locacao.id }}
+                </td>
+                <td>
+                    {{ locacao.dt_locacao }}
+                </td>
+                <td>
+                    {{ locacao.dt_devolucaoPrevista }}
+                </td>
+                <td>
+                    <div *ngIf="locacao.dtDevolucaoEfetiva != null; else alocado" class="text-success-emphasis">{{ locacao.dtDevolucaoEfetiva }}</div>
+                    <ng-template #alocado><i class="bi bi-clock-history text-warning"></i></ng-template>
+                </td>
+                <td>
+                    {{ locacao.valor }}
+                </td>
+                <td>
+                    {{ locacao.multa}}
+                </td>
+                <td>
+                    {{ locacao.item?.num_serie }} <span class="text-secondary">(#{{ locacao.item?.titulo?.name }})</span>
+                </td>
+                <td>
+                    {{ locacao.cliente?.name }} <span class="text-secondary">(#{{ locacao.cliente?.id }})</span>
+                </td>
+                <td align="end">
+                    <button *ngIf="locacao.dtDevolucaoEfetiva == null" type="button" 
+                        class="btn btn-sm btn-outline-success me-2" (click)="confirmDevolucao(locacao)">
+                        <i class="pi pi-check"></i>
+                    </button>
+                    <button *ngIf="locacao.dtDevolucaoEfetiva == null" type="button" class="btn btn-sm btn-outline-secondary me-2" (click)="showDialogEdit(locacao)">
+                        <i class="pi pi-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="confirmDelete(locacao)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </td>
+           </tr>
+       </tbody>
+   </table>
+
+    <p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>
+
+    <p-dialog header="Efetuar locação" [modal]="true" [(visible)]="create" [style]="{ width: '50vw', height: '40vw'}" (onHide)="create = false">
+        <form class="mt-2 d-flex flex-column gap-2" [formGroup]="locacaoForm">
+            <p-dropdown [style]="{ width: '100%'}" [options]="itens" [filter]="true" [showClear]="true" formControlName="item" optionLabel="num_serie" placeholder="Item"></p-dropdown>
+            <p-dropdown [style]="{ width: '100%'}" [options]="clientes" [filter]="true" [showClear]="true" formControlName="cliente" optionLabel="name" placeholder="Cliente"></p-dropdown>
+        </form>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="handleCreate()" [disabled]='locacaoForm.invalid' label="Cadastrar" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+
+    <p-dialog header="Editar locação" [modal]="true" [(visible)]="edit" [style]="{ width: '50vw', height: '40vw'}" (onHide)="edit = false">
+        <i class="bi bi-person-fill-gear fs-5"> {{ locacao.id }} </i>
+        <form class="mt-2 d-flex flex-column gap-2" [formGroup]="locacaoForm">
+            <input type="text" pInputText [disabled]="true" class="p-inputtext-sm" placeholder="Data de Locação" class="form-control" [value]="locacao.dt_locacao">
+            <p-calendar [style]="{ width: '100%'}" placeholder="Data de Devolução Prevista" formControlName="dt_devolucaoPrevista"></p-calendar>
+            <input class="p-inputtext-sm" placeholder="Valor" type="text" class="form-control" formControlName="valor">
+            <input type="text" pInputText [disabled]="true" class="p-inputtext-sm" placeholder="Multa" class="form-control" [value]="locacao.multa">
+            <p-dropdown [style]="{ width: '100%'}" [options]="itens" [filter]="true" [showClear]="true" formControlName="item" optionLabel="num_serie" placeholder="Item"></p-dropdown>
+            <p-dropdown [style]="{ width: '100%'}" [options]="clientes" [filter]="true" [showClear]="true" formControlName="cliente" optionLabel="name" placeholder="Cliente"></p-dropdown>
+        </form>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="handleUpdate()" [disabled]='locacaoForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>

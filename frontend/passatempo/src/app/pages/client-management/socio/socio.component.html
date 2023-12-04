@@ -81,7 +81,7 @@
     <p-dialog header="Cadastrar novo socio" [modal]="true" [(visible)]="create" [style]="{ width: '50vw', height: '40vw'}" (onHide)="create = false">
         <form class="mt-2 d-flex flex-column gap-2" [formGroup]="socioForm">
             <input class="p-inputtext-sm" placeholder="Nome do sócio" type="text" class="form-control" formControlName="name">
-            <input class="p-inputtext-sm" placeholder="Data de nascimento" type="text" class="form-control" formControlName="dt_nascimento">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
             <input class="p-inputtext-sm" placeholder="CPF" type="text" class="form-control" formControlName="CPF">
             <input class="p-inputtext-sm" placeholder="Endereço" type="text" class="form-control" formControlName="endereco">
@@ -96,7 +96,7 @@
         <i class="bi bi-person-fill-gear fs-5"> {{ socio.name }} </i>
         <form class="mt-2  d-flex flex-column gap-2" [formGroup]="socioForm">
             <input class="p-inputtext-sm" placeholder="Nome do sócio" type="text" class="form-control" formControlName="name">
-            <input class="p-inputtext-sm" placeholder="Data de nascimento" type="text" class="form-control" formControlName="dt_nascimento">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
             <input class="p-inputtext-sm" placeholder="CPF" type="text" class="form-control" formControlName="CPF">
             <input class="p-inputtext-sm" placeholder="Endereço" type="text" class="form-control" formControlName="endereco">

@@ -14,6 +14,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TreeTableModule } from 'primeng/treetable';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,8 @@ import { TreeTableModule } from 'primeng/treetable';
     DropdownModule,
     FormsModule,
     InputMaskModule,
-    TreeTableModule
+    TreeTableModule,
+    CalendarModule
   ],
   providers: [ConfirmationService]
 })

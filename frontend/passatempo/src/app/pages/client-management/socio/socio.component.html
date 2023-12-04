@@ -1,0 +1,109 @@
+<div class="container">
+   <p class="text-center fw-bold font-lato fs-3 mb-5">Gerenciar Sócios</p>
+</div>
+
+<div *ngIf="socios.length == 0">
+   <div class="bg-opacity-10 bg-danger rounded py-1 mb-5" style="width: 300px; margin: 0 auto">
+       <p class="text-center text-danger m-0"><i class="bi bi-info-circle-fill pe-3"></i>Não há sócios cadastradas</p>
+   </div>
+</div>
+
+<div class="container border rounded mb-5">
+   <table class="table table-responsive-lg table-hover">
+        <thead>
+            <tr>
+                <td></td>
+                <td class="text-secondary">
+                    Nome
+                </td>
+                <td class="text-secondary">
+                    Data de Nascimento
+                </td>
+                <td class="text-secondary">
+                    Sexo
+                </td>
+                <td class="text-secondary">
+                    CPF
+                </td>
+                <td class="text-secondary">
+                    Endereço
+                </td>
+                <td class="text-secondary">
+                    Telefone
+                </td>
+                <td align="end">
+                    <button type="button" class="btn btn-sm me-1">
+                            <i class="pi pi-search text-secondary-emphasis"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm text-success-emphasis ms-1" (click)="showDialogCreate()">
+                            <i class="pi pi-plus"></i>
+                    </button>
+                </td>
+            </tr>
+        </thead>
+      <tbody>
+           <tr *ngFor='let socio of socios'>
+                <td [ngClass]="{'bg-danger bg-opacity-25': !socio.ativo}" class="text-secondary">
+                    {{ socio.id }}
+                </td>
+                <td>
+                    {{ socio.name }}
+                </td>
+                <td>
+                    {{ socio.dt_nascimento }}
+                </td>
+                <td>
+                    {{ socio.sexo }}
+                </td>
+                <td>
+                    {{ socio.CPF }}
+                </td>
+                <td>
+                    {{ socio.endereco }}
+                </td>
+                <td>
+                    {{ socio.telefone }}
+                </td>
+                <td align="end"> 
+                    <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(socio)">
+                        <i class="pi pi-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(socio)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+   </table>
+
+    <p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>
+
+    <p-dialog header="Cadastrar novo socio" [modal]="true" [(visible)]="create" [style]="{ width: '50vw', height: '40vw'}" (onHide)="create = false">
+        <form class="mt-2 d-flex flex-column gap-2" [formGroup]="socioForm">
+            <input class="p-inputtext-sm" placeholder="Nome do sócio" type="text" class="form-control" formControlName="name">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
+            <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
+            <input class="p-inputtext-sm" placeholder="CPF" type="text" class="form-control" formControlName="CPF">
+            <input class="p-inputtext-sm" placeholder="Endereço" type="text" class="form-control" formControlName="endereco">
+            <input class="p-inputtext-sm" placeholder="Telefone" type="text" class="form-control" formControlName="telefone">
+        </form>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="handleCreate()" [disabled]='socioForm.invalid' label="Cadastrar" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+
+    <p-dialog header="Editar socio" [modal]="true" [(visible)]="edit" [style]="{ width: '50vw', height: '40vw'}" (onHide)="edit = false">
+        <i class="bi bi-person-fill-gear fs-5"> {{ socio.name }} </i>
+        <form class="mt-2  d-flex flex-column gap-2" [formGroup]="socioForm">
+            <input class="p-inputtext-sm" placeholder="Nome do sócio" type="text" class="form-control" formControlName="name">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
+            <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
+            <input class="p-inputtext-sm" placeholder="CPF" type="text" class="form-control" formControlName="CPF">
+            <input class="p-inputtext-sm" placeholder="Endereço" type="text" class="form-control" formControlName="endereco">
+            <input class="p-inputtext-sm" placeholder="Telefone" type="text" class="form-control" formControlName="telefone">
+        </form>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="handleUpdate()" [disabled]='socioForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>

@@ -70,7 +70,11 @@
         <form class="mt-2 d-flex flex-column gap-2" [formGroup]="itemForm">
             <input class="p-inputtext-sm" placeholder="Número de série" type="text" class="form-control" formControlName="num_serie">
             <p-inputMask [style]="{ width: '100%'}" placeholder="Data Aquisição" mask="99/99/9999" formControlName="dt_aquisicao"></p-inputMask>
-            <input class="p-inputtext-sm" placeholder="Tipo" type="text" class="form-control" formControlName="tipo">
+            <select class="form-select" aria-label="Large select example" formControlName="tipo">
+                <option selected value="Fita">Fita</option>
+                <option value="DVD">DVD</option>
+                <option value="BlueRay">BlueRay</option>
+            </select>
             <p-dropdown [style]="{ width: '100%'}" [options]="titulos" [filter]="true" [showClear]="true" formControlName="titulo" optionLabel="name" placeholder="Título"></p-dropdown>
         </form>
         <ng-template pTemplate="footer">
@@ -83,7 +87,11 @@
         <form class="mt-2  d-flex flex-column gap-2" [formGroup]="itemForm">
             <input class="p-inputtext-sm" placeholder="Número de série" type="text" class="form-control" formControlName="num_serie">
             <p-inputMask [style]="{ width: '100%'}" placeholder="Data Aquisição" mask="99/99/9999" formControlName="dt_aquisicao"></p-inputMask>
-            <input class="p-inputtext-sm" placeholder="Tipo" type="text" class="form-control" formControlName="tipo">
+            <select class="form-select" aria-label="Large select example" formControlName="tipo">
+                <option selected value="Fita">Fita</option>
+                <option value="DVD">DVD</option>
+                <option value="BlueRay">BlueRay</option>
+            </select>
             <p-dropdown [style]="{ width: '100%'}" [options]="titulos" formControlName="titulo" optionLabel="name" placeholder="Título"></p-dropdown>
         </form>
         <ng-template pTemplate="footer">

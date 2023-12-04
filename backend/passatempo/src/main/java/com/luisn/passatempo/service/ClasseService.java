@@ -38,9 +38,7 @@ public class ClasseService {
     public ClasseDTO update(Long id, @Valid ClasseDTO classe) {
         return classeRepository.findById(id)
             .map(registrobusca -> {
-                registrobusca.setName(classe.name());
-                registrobusca.setValue(classe.value());
-                registrobusca.setDate(classe.date());
+                registrobusca = classeMapper.toEntity(classe);
                 return classeMapper.toDTO(classeRepository.save(registrobusca));
             }).orElseThrow(() -> new RecordNotFoundException(id));
     }

@@ -10,9 +10,6 @@ public interface ClasseMapper {
 
     ClasseDTO toDTO(Classe classe);
 
-    List<ClasseDTO> toDTO(List<Classe> entidades);
-
     Classe toEntity(ClasseDTO dto);
 
-    List<Classe> toEntity(List<ClasseDTO> dtos);
 }

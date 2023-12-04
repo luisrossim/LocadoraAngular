@@ -10,10 +10,6 @@ public interface AtorMapper {
 
     AtorDTO toDTO(Ator ator);
 
-    List<AtorDTO> toDTO(List<Ator> entidades);
-
     Ator toEntity(AtorDTO dto);
-
-    List<Ator> toEntity(List<AtorDTO> dtos);
 
 }

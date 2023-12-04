@@ -33,17 +33,14 @@ export class DiretorComponent {
   }
 
   showDialogCreate() {
-    this.diretorForm.controls['id'].setValue('');
-    this.diretorForm.controls['name'].setValue('');
+    this.diretorForm.reset();
     this.create = true;
   }
 
   showDialogEdit(diretor: Diretor) {
     this.diretor = diretor
-    this.diretorForm.setValue({
-      id: diretor.id,
-      name: ''
-    });
+    this.diretorForm.controls['id'].setValue(diretor.id);
+    this.diretorForm.controls['name'].setValue(diretor.name);
     this.edit = true
   }
 

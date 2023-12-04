@@ -38,7 +38,7 @@ public class DiretorService {
     public DiretorDTO update(Long id, @Valid DiretorDTO diretor) {
         return diretorRepository.findById(id)
             .map(registrobusca -> {
-                registrobusca.setName(diretor.name());
+                registrobusca = diretorMapper.toEntity(diretor);
                 return diretorMapper.toDTO(diretorRepository.save(registrobusca));
             }).orElseThrow(() -> new RecordNotFoundException(id));
     }

@@ -13,6 +13,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { InputMaskModule } from 'primeng/inputmask';
+import { TreeTableModule } from 'primeng/treetable';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [],
@@ -31,7 +33,9 @@ import { InputMaskModule } from 'primeng/inputmask';
     MultiSelectModule,
     DropdownModule,
     FormsModule,
-    InputMaskModule
+    InputMaskModule,
+    TreeTableModule,
+    CalendarModule
   ],
   providers: [ConfirmationService]
 })

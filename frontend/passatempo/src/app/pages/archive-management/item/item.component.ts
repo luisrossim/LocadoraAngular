@@ -42,11 +42,7 @@ export class ItemComponent {
   }
 
   showDialogCreate() {
-    this.itemForm.controls['id'].setValue('');
-    this.itemForm.controls['num_serie'].setValue('');
-    this.itemForm.controls['dt_aquisicao'].setValue('');
-    this.itemForm.controls['tipo'].setValue('');
-    this.itemForm.controls['titulo'].setValue('');
+    this.itemForm.reset();
     this.create = true;
   }
 

@@ -16,9 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 
@@ -78,6 +82,17 @@ public class LocacaoService {
     }
 
 
+    public LocacaoDTO devolucao(Long id, @Valid LocacaoDTO locacao) {
+        return locacaoRepository.findById(id)
+                .map(registrobusca -> {
+                    registrobusca.setDtDevolucaoEfetiva(new Date());
+                    registrobusca.setMulta(checkMulta(registrobusca));
+                    registrobusca.setValor(registrobusca.getValor() + registrobusca.getMulta());
+                    return locacaoMapper.toDTO(locacaoRepository.save(registrobusca));
+                }).orElseThrow(() -> new RecordNotFoundException(id));
+    }
+
+
     public void cancelar(@PathVariable Long id){
         Locacao locacao = locacaoRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id));
@@ -99,6 +114,7 @@ public class LocacaoService {
         return false;
     }
 
+
     public boolean itemAlocado(Item item) {
         Locacao checkAlocado = locacaoRepository.findByItemAndDtDevolucaoEfetivaIsNull(item);
         if(checkAlocado != null){
@@ -109,11 +125,27 @@ public class LocacaoService {
     }
 
 
+    public float checkMulta(Locacao locacao) {
+        if(locacao.getDt_devolucaoPrevista().before(new Date())) {
+            long diasAtraso = calcularAtraso(locacao);
+            return diasAtraso * 2;
+        }
+        return 0;
+    }
+
+
     public Date handleAddTime(int dias) {
         Calendar dataPrevista = Calendar.getInstance();
         dataPrevista.setTime(new Date());
         dataPrevista.add(Calendar.DAY_OF_MONTH, dias);
         return dataPrevista.getTime();
+    }
+
+
+    public long calcularAtraso(Locacao locacao) {
+        long dias = locacao.getDt_devolucaoPrevista().getTime() - locacao.getDtDevolucaoEfetiva().getTime();
+        TimeUnit time = TimeUnit.DAYS;
+        return Math.abs(time.convert(dias, TimeUnit.MILLISECONDS));
     }
 
 }

@@ -50,6 +50,11 @@ public class LocacaoController {
         return locacaoService.update(id, locacao);
     }
 
+    @PutMapping("/devolver/{id}")
+    @Operation(description = "Devolução de Locações")
+    public LocacaoDTO devolucao(@PathVariable Long id, @RequestBody @Valid LocacaoDTO locacao) {
+        return locacaoService.devolucao(id, locacao);
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)

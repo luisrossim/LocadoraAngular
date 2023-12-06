@@ -27,6 +27,8 @@ export class TituloComponent {
   titulo: Titulo = {}
   showAtores: boolean = false;
   selectedAtores: Ator[] = []
+  categorias: string[] = ["Suspense","Terror","Comédia","Ação",
+  "Aventura","Drama", "Comédia Romântica", "Ficção Científica"]
   tituloForm = this.formBuilder.group({
     id: [''],
     name: [null, [Validators.required]],

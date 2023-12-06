@@ -60,11 +60,22 @@ public class DependenteService {
 
 
     public DependenteDTO update(Long id, @Valid DependenteDTO dependente) {
-        return dependenteRepository.findById(id)
-                .map(registrobusca -> {
-                    registrobusca = dependenteMapper.toEntity(dependente);
-                    return dependenteMapper.toDTO(dependenteRepository.save(registrobusca));
-                }).orElseThrow(() -> new RecordNotFoundException(id));
+        Dependente registro = dependenteRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
+
+        Socio socio = socioRepository.findById(dependente.socio().id())
+                .orElseThrow(() -> new RecordNotFoundException(dependente.socio().id()));
+
+        if(!socio.isAtivo()){
+            throw new FailedException("Não é possível realizar o cadastro pois o sócio está desativado"); }
+
+        List<Dependente> dependentesAtivos = socio.getDependentes()
+                .stream().filter(Dependente::isAtivo)
+                .collect(Collectors.toList());
+
+        if(dependentesAtivos.size() == 3){
+            throw new FailedException("Não é possível realizar o cadastro pois o sócio possui 3 dependentes"); }
+
+        return dependenteMapper.toDTO(dependenteRepository.save(dependenteMapper.toEntity(dependente)));
     }
 
 

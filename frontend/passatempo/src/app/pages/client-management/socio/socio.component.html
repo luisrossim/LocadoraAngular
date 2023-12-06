@@ -46,7 +46,7 @@
                 <td [ngClass]="{'bg-danger bg-opacity-25': !socio.ativo}" class="text-secondary">
                     {{ socio.id }}
                 </td>
-                <td>
+                <td [ngClass]="{'text-danger-emphasis': !socio.ativo}">
                     {{ socio.name }}
                 </td>
                 <td>
@@ -64,12 +64,17 @@
                 <td>
                     {{ socio.telefone }}
                 </td>
-                <td align="end"> 
-                    <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(socio)">
-                        <i class="pi pi-pencil"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(socio)">
-                        <i class="pi pi-trash"></i>
+                <td align="end">
+                    <div *ngIf="socio.ativo">
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(socio)">
+                            <i class="pi pi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(socio)">
+                            <i class="pi pi-trash"></i>
+                        </button>
+                    </div>
+                    <button *ngIf="!socio.ativo" type="button" class="btn btn-sm btn-outline-success ms-1" (click)="showDialogEdit(socio)">
+                        <i class="pi pi-check">Ativar</i>
                     </button>
                 </td>
             </tr>
@@ -83,27 +88,29 @@
             <input class="p-inputtext-sm" placeholder="Nome do sócio" type="text" class="form-control" formControlName="name">
             <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
-            <input class="p-inputtext-sm" placeholder="CPF" type="text" class="form-control" formControlName="CPF">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="CPF" mask="999.999.999-99" formControlName="CPF"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Endereço" type="text" class="form-control" formControlName="endereco">
-            <input class="p-inputtext-sm" placeholder="Telefone" type="text" class="form-control" formControlName="telefone">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Telefone" mask="(99) 99999-9999" formControlName="telefone"></p-inputMask>
         </form>
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-check" (click)="handleCreate()" [disabled]='socioForm.invalid' label="Cadastrar" styleClass="p-button-text"></p-button>
         </ng-template>
     </p-dialog>
 
-    <p-dialog header="Editar socio" [modal]="true" [(visible)]="edit" [style]="{ width: '50vw', height: '40vw'}" (onHide)="edit = false">
+    <p-dialog header="Gerenciar sócio" [modal]="true" [(visible)]="edit" [style]="{ width: '50vw', height: '40vw'}" (onHide)="edit = false">
         <i class="bi bi-person-fill-gear fs-5"> {{ socio.name }} </i>
         <form class="mt-2  d-flex flex-column gap-2" [formGroup]="socioForm">
+            <p-divider></p-divider>
             <input class="p-inputtext-sm" placeholder="Nome do sócio" type="text" class="form-control" formControlName="name">
             <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
-            <input class="p-inputtext-sm" placeholder="CPF" type="text" class="form-control" formControlName="CPF">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="CPF" mask="999.999.999-99" formControlName="CPF"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Endereço" type="text" class="form-control" formControlName="endereco">
-            <input class="p-inputtext-sm" placeholder="Telefone" type="text" class="form-control" formControlName="telefone">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Telefone" mask="(99) 99999-9999" formControlName="telefone"></p-inputMask>
         </form>
         <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="handleUpdate()" [disabled]='socioForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+            <p-button *ngIf="socio.ativo" icon="pi pi-check" (click)="handleUpdate()" [disabled]='socioForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+            <p-button *ngIf="!socio.ativo" icon="pi pi-check" (click)="handleUpdate()" [disabled]='socioForm.invalid' label="Reativar" styleClass="p-button-text"></p-button>
         </ng-template>
     </p-dialog>
 </div>

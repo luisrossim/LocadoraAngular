@@ -14,3 +14,17 @@ export class Titulo {
       public classe?: Classe
    ) {}
 }
+["Suspense","Terror","Comédia","Ação",
+"Aventura","Drama", "Comédia Romântica", "Ficção Científica"]
+
+export const categorias = [
+   {id: '1', name: 'Suspense'},
+   {id: '2', name: 'Terror'},
+   {id: '3', name: 'Comédia'},
+   {id: '4', name: 'Ação'},
+   {id: '5', name: 'Aventura'},
+   {id: '6', name: 'Drama'},
+   {id: '7', name: 'Comédia Romântica'},
+   {id: '8', name: 'Ficção Científica'}
+ ]
+ 

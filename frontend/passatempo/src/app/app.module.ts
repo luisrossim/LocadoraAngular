@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SidebarComponent } from './core/components/sidebar/sidebar.component';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -25,6 +26,7 @@ import { SidebarComponent } from './core/components/sidebar/sidebar.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    SharedModule,
     ToastrModule.forRoot()
   ],
   providers: [],

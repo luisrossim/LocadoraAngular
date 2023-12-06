@@ -1,3 +1,162 @@
-<div class="container">
-   <p class="text-center">home works</p>
+<div class="container mb-5">
+   <p class="text-center fw-bold font-lato fs-3 mb-5">Consultar Títulos</p>
+
+   <div *ngIf="!filterCategorias && !filterAtores">
+      <div class="row text-center mt-5 mb-5">
+         <div class="col">
+            <button type="button" class="btn btn btn-outline-info me-4" (click)="changeToCategoria()">
+               Filtrar por Categoria
+            </button>
+            
+            <button type="button" class="btn btn btn-outline-warning" (click)="changeToAtor()">
+               Filtrar por Ator
+            </button>
+         </div>
+      </div>
+
+      <div class="row text-center">
+         <div class="col-3"></div>
+         <div class="col-6 text-center">
+            <p-dropdown [style]="{width: '100%'}" [options]="titulos" [(ngModel)]="selectedTitulo"
+               optionLabel="name" [filter]="true" filterBy="name" placeholder="Filtrar pelo nome do Título">
+            </p-dropdown>
+         </div>
+         <div class="col-3"></div>
+      </div>
+
+      <div *ngIf="selectedTitulo.name != null" align="center" class="mt-5 m-auto">
+         <p-card header="{{selectedTitulo.name}}" subheader="{{ selectedTitulo.ano }}" [style]="{ width: '420px'}">
+               <ng-template pTemplate="header">
+                  <img alt="Card" src="../../../assets/images/img-titulo.jpg"/>
+               </ng-template><p-divider></p-divider>
+               <p class="text-info">{{ selectedTitulo.categoria }}</p>
+               <p-divider></p-divider>
+               <small class="text-center text-secondary-emphasis">Sinopse</small>
+               <p>{{ selectedTitulo.sinopse }}</p>
+               <p-divider></p-divider>
+               <small class="text-center text-secondary-emphasis">Atores</small>
+               <p><span *ngFor="let ator of selectedTitulo.listaAtores"> 
+                     <span class="text-warning">{{ ator.name }}</span>, 
+                  </span></p>
+               <small class="text-center text-secondary-emphasis">Diretor</small>
+               <p class="text-success">{{ selectedTitulo.diretor?.name }} </p><p-divider></p-divider>
+               <ng-template pTemplate="footer">
+                  <p class="bg-success py-3 fs-6" (click)="filterAtores = true">
+                     Valor de locação: R$ {{ selectedTitulo.classe?.value }}</p>
+              </ng-template>
+        </p-card>
+      </div>
+   </div>
+
+
+
+   <div *ngIf="filterCategorias">
+      <div class="text-center">
+         <button type="button" class="btn btn btn-outline-danger mb-5" (click)="changeToName()">
+            <i class="bi bi-arrow-left-circle fs-5"></i>
+         </button>
+      </div>
+      <div *ngIf="!showFilterName" class="row mb-5">
+         <div class="col-11">
+            <p-dropdown [style]="{width: '100%'}" [options]="categorias" [(ngModel)]="selectedCategoria" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Filtrar pela Categoria">
+            </p-dropdown>
+         </div>
+         <div class="col-1 text-end">
+            <button (click)="handleCategoria()" type="button" class="btn btn btn-info">Consultar</button>
+         </div>
+      </div>
+
+      <div *ngIf="showFilterName" class="row mt-3">
+         <p class="text-center text-secondary "> Categoria {{ selectedCategoria.name }}</p>
+         <div class="col-11">
+            <p-dropdown [style]="{width: '100%'}" [options]="titulosFiltrados" [(ngModel)]="selectedTituloC"
+               optionLabel="name" [filter]="true" filterBy="name" placeholder="Filtrar pelo nome do Título">
+            </p-dropdown>
+         </div>
+         <div class="col-1 text-end">
+            <button (click)="showFilterName = false" type="button" class="btn">
+               <i class="bi bi-arrow-left-circle fs-5"></i>
+            </button>
+         </div>
+      </div>
+
+      <div *ngIf="selectedTituloC.name != null" align="center" class="mt-5 m-auto">
+         <p-card header="{{selectedTituloC.name}}" subheader="{{ selectedTituloC.ano }}" [style]="{ width: '420px'}">
+               <ng-template pTemplate="header">
+                  <img alt="Card" src="../../../assets/images/img-titulo.jpg"/>
+               </ng-template><p-divider></p-divider>
+               <p class="text-info">{{ selectedTituloC.categoria }}</p>
+               <p-divider></p-divider>
+               <small class="text-center text-secondary-emphasis">Sinopse</small>
+               <p>{{ selectedTituloC.sinopse }}</p>
+               <p-divider></p-divider>
+               <small class="text-center text-secondary-emphasis">Atores</small>
+               <p><span *ngFor="let ator of selectedTituloC.listaAtores"> 
+                     <span class="text-warning">{{ ator.name }}</span>, 
+                  </span></p>
+               <small class="text-center text-secondary-emphasis">Diretor</small>
+               <p class="text-success">{{ selectedTituloC.diretor?.name }} </p><p-divider></p-divider>
+               <ng-template pTemplate="footer">
+                  <p class="bg-success py-3 fs-6" (click)="filterAtores = true">
+                     Valor de locação: R$ {{ selectedTituloC.classe?.value }}</p>
+              </ng-template>
+        </p-card>
+      </div>
+   </div>
+
+
+
+   <div *ngIf="filterAtores">
+      <div class="text-center">
+         <button type="button" class="btn btn btn-outline-danger mb-5" (click)="changeToName()">
+            <i class="bi bi-arrow-left-circle fs-5"></i>
+         </button>
+      </div>
+      <div *ngIf="!showFilterName" class="row mb-5">
+         <div class="col-11">
+            <p-dropdown [style]="{width: '100%'}" [options]="atores" [(ngModel)]="selectedAtor" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Filtrar por Ator">
+            </p-dropdown>
+         </div>
+         <div class="col-1 text-end">
+            <button (click)="handleAtores()" type="button" class="btn btn btn-info">Consultar</button>
+         </div>
+      </div>
+
+      <div *ngIf="showFilterName" class="row mt-3">
+         <p class="text-center text-secondary "> Ator {{ selectedAtor.name }}</p>
+         <div class="col-11">
+            <p-dropdown [style]="{width: '100%'}" [options]="titulosFiltrados" [(ngModel)]="selectedTituloA"
+               optionLabel="name" [filter]="true" filterBy="name" placeholder="Filtrar pelo nome do Título">
+            </p-dropdown>
+         </div>
+         <div class="col-1 text-end">
+            <button (click)="showFilterName = false" type="button" class="btn">
+               <i class="bi bi-arrow-left-circle fs-5"></i>
+            </button>
+         </div>
+      </div>
+
+      <div *ngIf="selectedTituloA.name != null" align="center" class="mt-5 m-auto">
+         <p-card header="{{selectedTituloA.name}}" subheader="{{ selectedTituloA.ano }}" [style]="{ width: '420px'}">
+               <ng-template pTemplate="header">
+                  <img alt="Card" src="../../../assets/images/img-titulo.jpg"/>
+               </ng-template><p-divider></p-divider>
+               <p class="text-info">{{ selectedTituloA.categoria }}</p>
+               <p-divider></p-divider>
+               <small class="text-center text-secondary-emphasis">Sinopse</small>
+               <p>{{ selectedTituloA.sinopse }}</p>
+               <p-divider></p-divider>
+               <small class="text-center text-secondary-emphasis">Atores</small>
+               <p><span *ngFor="let ator of selectedTituloA.listaAtores"> 
+                     <span class="text-warning">{{ ator.name }}</span>, 
+                  </span></p>
+               <small class="text-center text-secondary-emphasis">Diretor</small>
+               <p class="text-success">{{ selectedTituloA.diretor?.name }} </p><p-divider></p-divider>
+               <ng-template pTemplate="footer">
+                  <p class="bg-success py-3 fs-6" (click)="filterAtores = true">
+                     Valor de locação: R$ {{ selectedTituloA.classe?.value }}</p>
+              </ng-template>
+        </p-card>
+      </div>
+   </div>
 </div>

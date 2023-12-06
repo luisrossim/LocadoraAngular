@@ -18,6 +18,7 @@ export class ItemComponent {
   titulos: Titulo[] = []
   create: boolean = false;
   edit: boolean = false;
+  tipos: string[] = ["Fita","DvD","BlueRay"]
   itemForm = this.formBuilder.group({
     id: [''],
     num_serie: [null, [Validators.required]],

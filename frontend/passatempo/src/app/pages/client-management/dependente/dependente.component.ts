@@ -100,7 +100,7 @@ export class DependenteComponent {
         this.fetchDependentes()
         this.edit = false
       },
-      error: (error) => this.alerts.showError('Erro ao editar dependente!')
+      error: (error) => this.alerts.showError(error.error)
     });
   }
 

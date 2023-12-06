@@ -52,13 +52,18 @@
                 <td>
                     {{ dependente.socio?.name }} <span class="text-secondary">(#{{ dependente.socio?.id }})</span>
                 </td>
-               <td align="end"> 
-                   <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(dependente)">
-                       <i class="pi pi-pencil"></i>
-                   </button>
-                   <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(dependente)">
-                       <i class="pi pi-trash"></i>
-                   </button>
+               <td align="end">
+                    <div *ngIf="dependente.ativo">
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-1" (click)="showDialogEdit(dependente)">
+                            <i class="pi pi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger ms-1" (click)="confirmDelete(dependente)">
+                            <i class="pi pi-trash"></i>
+                        </button>
+                    </div>
+                    <button *ngIf="!dependente.ativo" type="button" class="btn btn-sm btn-outline-success ms-1" (click)="showDialogEdit(dependente)">
+                        <i class="pi pi-check">Ativar</i>
+                    </button>
                </td>
            </tr>
        </tbody>
@@ -69,7 +74,7 @@
     <p-dialog header="Cadastrar novo dependente" [modal]="true" [(visible)]="create" [style]="{ width: '50vw', height: '40vw'}" (onHide)="create = false">
         <form class="mt-2 d-flex flex-column gap-2" [formGroup]="dependenteForm">
             <input class="p-inputtext-sm" placeholder="Nome do dependente" type="text" class="form-control" formControlName="name">
-            <input class="p-inputtext-sm" placeholder="Data de nascimento" type="text" class="form-control" formControlName="dt_nascimento">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
             <p-dropdown [style]="{ width: '100%'}" [options]="socios" [filter]="true" [showClear]="true" formControlName="socio" optionLabel="name" placeholder="Sócio"></p-dropdown>
         </form>
@@ -78,16 +83,18 @@
         </ng-template>
     </p-dialog>
 
-    <p-dialog header="Editar dependente" [modal]="true" [(visible)]="edit" [style]="{ width: '50vw', height: '40vw'}" (onHide)="edit = false">
+    <p-dialog header="Gerenciar dependente" [modal]="true" [(visible)]="edit" [style]="{ width: '50vw', height: '40vw'}" (onHide)="edit = false">
         <i class="bi bi-person-fill-gear fs-5"> {{ dependente.name }} </i>
         <form class="mt-2  d-flex flex-column gap-2" [formGroup]="dependenteForm">
+            <p-divider></p-divider>
             <input class="p-inputtext-sm" placeholder="Nome do dependente" type="text" class="form-control" formControlName="name">
-            <input class="p-inputtext-sm" placeholder="Data de nascimento" type="text" class="form-control" formControlName="dt_nascimento">
+            <p-inputMask [style]="{ width: '100%'}" placeholder="Data de nascimento" mask="99/99/9999" formControlName="dt_nascimento"></p-inputMask>
             <input class="p-inputtext-sm" placeholder="Sexo" type="text" class="form-control" formControlName="sexo">
             <p-dropdown [style]="{ width: '100%'}" [options]="socios" [filter]="true" formControlName="socio" optionLabel="name" placeholder="Sócio"></p-dropdown>
         </form>
         <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="handleUpdate()" [disabled]='dependenteForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+            <p-button *ngIf="dependente.ativo" icon="pi pi-check" (click)="handleUpdate()" [disabled]='dependenteForm.invalid' label="Editar" styleClass="p-button-text"></p-button>
+            <p-button *ngIf="!dependente.ativo" icon="pi pi-check" (click)="handleUpdate()" [disabled]='dependenteForm.invalid' label="Reativar" styleClass="p-button-text"></p-button>
         </ng-template>
     </p-dialog>
 </div>

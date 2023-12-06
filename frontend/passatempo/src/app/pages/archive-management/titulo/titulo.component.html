@@ -91,7 +91,12 @@
             <input class="p-inputtext-sm" placeholder="Nome do titulo" type="text" class="form-control" formControlName="name">
             <input class="p-inputtext-sm" placeholder="Ano" type="number" class="form-control" formControlName="ano">
             <input class="p-inputtext-sm" placeholder="Sinopse" type="text" class="form-control" formControlName="sinopse">
-            <input class="p-inputtext-sm" placeholder="Categoria" type="text" class="form-control" formControlName="categoria">
+            <span class="p-float-label">
+                <p-dropdown [style]="{ width: '100%'}" [options]="categorias" 
+                    formControlName="categoria" inputId="float-label">
+                </p-dropdown>
+                <label for="float-label">Categoria</label>
+            </span>
             <p-multiSelect [style]="{ width: '100%'}" [options]="atores" formControlName="listaAtores" placeholder="Atores" optionLabel="name"></p-multiSelect>
             <p-dropdown [style]="{ width: '100%'}" [options]="classes" [filter]="true" [showClear]="true" formControlName="classe" optionLabel="name" placeholder="Classe"></p-dropdown>
             <p-dropdown [style]="{ width: '100%'}" [options]="diretores" [filter]="true" [showClear]="true" formControlName="diretor" optionLabel="name" placeholder="Diretor"></p-dropdown>
@@ -107,7 +112,12 @@
             <input class="p-inputtext-sm" placeholder="Nome do titulo" type="text" class="form-control" formControlName="name">
             <input class="p-inputtext-sm" placeholder="Ano" type="number" class="form-control" formControlName="ano">
             <input class="p-inputtext-sm" placeholder="Sinopse" type="text" class="form-control" formControlName="sinopse">
-            <input class="p-inputtext-sm" placeholder="Categoria" type="text" class="form-control" formControlName="categoria">
+            <span class="p-float-label">
+                <p-dropdown [style]="{ width: '100%'}" [options]="categorias" 
+                    formControlName="categoria" inputId="float-label">
+                </p-dropdown>
+                <label for="float-label">Categoria</label>
+            </span>
             <p-multiSelect [style]="{ width: '100%'}" [options]="atores" formControlName="listaAtores" placeholder="Atores" optionLabel="name"></p-multiSelect>
             <p-dropdown [style]="{ width: '100%'}" [options]="classes" formControlName="classe" optionLabel="name" placeholder="Classe"></p-dropdown>
             <p-dropdown [style]="{ width: '100%'}" [options]="diretores" formControlName="diretor" optionLabel="name" placeholder="Diretor"></p-dropdown>
